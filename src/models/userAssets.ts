@@ -65,7 +65,7 @@ export function UserAssetsFactory(sequelize: Sequelize) {
   );
 }
 
-export function AssociateUserPost() {
-  UserData.hasMany(UserAssets, { foreignKey: "userId" });
-  UserAssets.belongsTo(UserData, { foreignKey: "userId" });
+export function AssociateUserAssets() {
+  UserData.hasMany(UserAssets, { foreignKey: "user_id" });
+  UserAssets.belongsTo(UserData, { foreignKey: "user_d" });
 }
