@@ -24,7 +24,7 @@ export class UserData extends Model<
   declare createdAt: Date;
   declare updatedAt: Date;
 }
-export function UserFactory(sequelize: Sequelize) {
+export function UserDataFactory(sequelize: Sequelize) {
   UserData.init(
     {
       user_id: {
