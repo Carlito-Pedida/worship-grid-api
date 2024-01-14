@@ -4,9 +4,9 @@ import { UserDataFactory } from "./userData";
 import { AssociateUserResponse, UserResponseFactory } from "./userResponse";
 require("dotenv").config();
 
-const dbName = "worshipgridDB";
-const username = "root";
-const password = process.env.DATABASE_PASSWORD;
+const dbName = <any>process.env.DB_NAME;
+const username = <any>process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
 
 const sequelize = new Sequelize(dbName, username, password, {
   host: "127.0.0.1",
