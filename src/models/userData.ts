@@ -6,9 +6,9 @@ import {
   Sequelize
 } from "sequelize";
 
-export class Users extends Model<
-  InferAttributes<Users>,
-  InferCreationAttributes<Users>
+export class UserData extends Model<
+  InferAttributes<UserData>,
+  InferCreationAttributes<UserData>
 > {
   declare user_id: number;
   declare first_name: string;
@@ -25,7 +25,7 @@ export class Users extends Model<
   declare updatedAt: Date;
 }
 export function UserFactory(sequelize: Sequelize) {
-  Users.init(
+  UserData.init(
     {
       user_id: {
         type: DataTypes.INTEGER,
