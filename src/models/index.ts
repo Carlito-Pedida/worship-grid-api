@@ -2,8 +2,9 @@ import { Sequelize } from "sequelize";
 import { AssociateUserAssets, UserAssetsFactory } from "./userAssets";
 import { UserDataFactory } from "./userData";
 import { AssociateUserResponse, UserResponseFactory } from "./userResponse";
+require("dotenv").config();
 
-const dbName = "worship-gridDB";
+const dbName = "worshipgridDB";
 const username = "root";
 const password = process.env.DATABASE_PASSWORD;
 

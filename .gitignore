@@ -11,6 +11,7 @@
 # production
 /build
 /.history
+/.env
 
 
 # misc
