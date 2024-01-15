@@ -7,13 +7,14 @@ import {
 } from "sequelize";
 import { UserData } from "./userData";
 import { UserResponse } from "./userResponse";
+import { truncate } from "fs";
 
 export class UserAssets extends Model<
   InferAttributes<UserAssets>,
   InferCreationAttributes<UserAssets>
 > {
   declare asset_id: number;
-  declare messages: string;
+  declare message: string;
   declare imageLink: string;
   declare videoLink: string;
   declare user_id: number;
@@ -31,9 +32,9 @@ export function UserAssetsFactory(sequelize: Sequelize) {
         allowNull: false,
         unique: "compositeIndex"
       },
-      messages: {
+      message: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       imageLink: {
         type: DataTypes.STRING,
