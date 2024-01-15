@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import { db } from "./models";
+import userRoutes from "./routes/userRoutes";
 
 const cors = require("cors");
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
+app.use("/serve/user", userRoutes);
 
 app.use((req, res, next) => {
   res.status(404).end();
