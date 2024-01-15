@@ -52,7 +52,7 @@ export function UserResponseFactory(sequelize: Sequelize) {
     },
     {
       freezeTableName: true,
-      tableName: "userResponse",
+      tableName: "responses",
       sequelize
     }
   );

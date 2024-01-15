@@ -7,6 +7,14 @@ import {
   verifyUser
 } from "../authServices/auth";
 
+export const getAllUserData: RequestHandler = async (req, res, next) => {
+  let users = await UserData.findAll({
+    attributes: { exclude: ["password"] },
+    include: [{ all: true, nested: true }]
+  });
+  res.status(200).json(users);
+};
+
 export const signupUser: RequestHandler = async (req, res, next) => {
   let newUser: UserData = req.body;
   if (newUser.username && newUser.password) {
@@ -74,6 +82,19 @@ export const getOneUser: RequestHandler = async (req, res, next) => {
     });
   } else {
     res.status(401).send();
+  }
+};
+
+export const getUserAssets: RequestHandler = async (req, res, next) => {
+  let user: UserData | null = await verifyUser(req);
+
+  if (user) {
+    let assets = await UserData.findByPk(user.user_id, {
+      include: [{ all: true, nested: true }]
+    });
+    res.status(200).json(assets);
+  } else {
+    res.status(404).json();
   }
 };
 
