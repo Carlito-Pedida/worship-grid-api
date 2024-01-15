@@ -111,3 +111,23 @@ export const updateUserData: RequestHandler = async (req, res, next) => {
     res.status(400).json();
   }
 };
+
+export const deleteUserData: RequestHandler = async (req, res, next) => {
+  let user: UserData | null = await verifyUser(req);
+
+  if (user) {
+    let user_id = req.params.user_id;
+    let userFound = await UserData.findByPk(user_id);
+
+    if (userFound) {
+      if (userFound.user_id == user.user_id) {
+        await userFound.destroy();
+        res.status(200).json("User Data Deleted");
+      }
+    } else {
+      res.status(403).json("Not Authorized");
+    }
+  } else {
+    res.status(401).json("Not Logged in");
+  }
+};
