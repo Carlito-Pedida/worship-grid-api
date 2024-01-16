@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   deleteUserData,
+  getAllUserData,
   getOneUser,
   getUserAssets,
   signinUser,
@@ -9,6 +10,8 @@ import {
 } from "../controllers/userDataContol";
 
 const router = Router();
+
+router.get("/", getAllUserData);
 
 router.post("/signup", signupUser);
 

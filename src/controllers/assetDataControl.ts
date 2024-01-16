@@ -12,7 +12,7 @@ export const getAllUserAssets: RequestHandler = async (req, res, next) => {
   res.status(200).json(userAsset);
 };
 
-export const createAsset: RequestHandler = async (req, res, next) => {
+export const createUserAsset: RequestHandler = async (req, res, next) => {
   let user: UserData | null = await verifyUser(req);
 
   if (!user) {
