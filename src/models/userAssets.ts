@@ -7,17 +7,16 @@ import {
 } from "sequelize";
 import { UserData } from "./userData";
 import { UserResponse } from "./userResponse";
-import { truncate } from "fs";
 
 export class UserAssets extends Model<
   InferAttributes<UserAssets>,
   InferCreationAttributes<UserAssets>
 > {
   declare asset_id: number;
+  declare user_id: number;
   declare message: string;
   declare imageLink: string;
   declare videoLink: string;
-  declare user_id: number;
   declare createdAt?: Date;
   declare updatedAt?: Date;
 }
@@ -32,6 +31,10 @@ export function UserAssetsFactory(sequelize: Sequelize) {
         allowNull: false,
         unique: "compositeIndex"
       },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       message: {
         type: DataTypes.STRING,
         allowNull: true
@@ -43,10 +46,6 @@ export function UserAssetsFactory(sequelize: Sequelize) {
       videoLink: {
         type: DataTypes.STRING,
         allowNull: true
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -69,6 +68,6 @@ export function UserAssetsFactory(sequelize: Sequelize) {
 
 export function AssociateUserAssets() {
   UserData.hasMany(UserAssets, { foreignKey: "user_id" });
-  UserAssets.belongsTo(UserData, { foreignKey: "user_d" });
-  UserAssets.hasMany(UserResponse, { foreignKey: "response_id" });
+  UserAssets.belongsTo(UserData, { foreignKey: "user_id" });
+  UserAssets.hasMany(UserResponse, { foreignKey: "asset_id" });
 }

@@ -3,6 +3,7 @@ import morgan from "morgan";
 import { db } from "./models";
 import userRoutes from "./routes/userRoutes";
 import assetRoutes from "./routes/assetRoutes";
+import responseRoutes from "./routes/responseRoutes";
 
 const cors = require("cors");
 
@@ -20,13 +21,14 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 app.use("/server/users", userRoutes);
 app.use("/server/assets", assetRoutes);
+app.use("/server/responses", responseRoutes);
 
 app.use((req, res, next) => {
   res.status(404).end();
 });
 
 // Syncing our database
-db.sync({ alter: true }).then(() => {
+db.sync({ alter: false }).then(() => {
   console.info("connected to the database!");
 });
 

@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
-import { AssociateUserAssets, UserAssetsFactory } from "./userAssets";
 import { UserDataFactory } from "./userData";
+import { AssociateUserAssets, UserAssetsFactory } from "./userAssets";
 import { AssociateUserResponse, UserResponseFactory } from "./userResponse";
+
 require("dotenv").config();
 
 const dbName = <any>process.env.DB_NAME;

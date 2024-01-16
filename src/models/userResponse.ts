@@ -16,6 +16,7 @@ export class UserResponse extends Model<
   declare response_id: number;
   declare asset_id: number;
   declare user_id: number;
+  declare reply: string;
   declare reactions: string;
   declare createdAt: Date;
   declare updatedAt: Date;
@@ -37,9 +38,13 @@ export function UserResponseFactory(sequelize: Sequelize) {
         type: DataTypes.INTEGER,
         allowNull: false
       },
+      reply: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       reactions: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE,
