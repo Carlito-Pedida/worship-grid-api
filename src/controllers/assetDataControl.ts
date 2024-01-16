@@ -16,7 +16,7 @@ export const createAsset: RequestHandler = async (req, res, next) => {
   let user: UserData | null = await verifyUser(req);
 
   if (!user) {
-    return res.status(403).send();
+    return res.status(403).send("Unauthorized");
   }
 
   let newAsset: UserAssets = req.body;
@@ -26,7 +26,7 @@ export const createAsset: RequestHandler = async (req, res, next) => {
     let created = await UserAssets.create(newAsset);
     res.status(201).json(created);
   } else {
-    res.status(400).send();
+    res.status(400).send("Bad Request");
   }
 };
 
