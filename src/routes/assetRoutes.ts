@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  createAsset,
+  createUserAsset,
   deleteUserAsset,
   getAllUserAssets,
   updateUserAsset
@@ -10,7 +10,7 @@ const router = Router();
 
 router.get("/", getAllUserAssets);
 
-router.post("/", createAsset);
+router.post("/", createUserAsset);
 
 router.put("/:asset_id/edit", updateUserAsset);
 
