@@ -10,7 +10,7 @@ const router = Router();
 
 router.get("/", getAllUserAssets);
 
-router.post("/new", createUserAsset);
+router.post("/create_new_asset", createUserAsset);
 
 router.put("/:asset_id/edit", updateUserAsset);
 
