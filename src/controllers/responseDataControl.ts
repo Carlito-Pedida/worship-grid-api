@@ -27,7 +27,7 @@ export const createUserReply: RequestHandler = async (req, res, next) => {
   let newUserReply: UserResponse = req.body;
   newUserReply.user_id = user.user_id;
 
-  if (newUserReply.reply) {
+  if (newUserReply.reply || newUserReply.reactions) {
     let created = await UserResponse.create(newUserReply);
     res.status(201).json(created);
   } else {
