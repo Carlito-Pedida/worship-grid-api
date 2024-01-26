@@ -30,23 +30,13 @@ export const createUserAsset: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const deleteUserAsset: RequestHandler = async (req, res, next) => {
-  let user: UserData | null = await verifyUser(req);
-
-  if (user) {
-    let asset_id = req.params.asset_id;
-    let assetFound = await UserAssets.findByPk(asset_id);
-
-    if (assetFound) {
-      if (assetFound.user_id == user.user_id) {
-        await assetFound.destroy();
-        res.status(200).json("Post Deleted");
-      }
-    } else {
-      res.status(403).json("Not Authorized");
-    }
+export const getOneUserAsset: RequestHandler = async (req, res, next) => {
+  let asset_id = req.params.asset_id;
+  let foundAsset = await UserAssets.findByPk(asset_id);
+  if (foundAsset) {
+    res.status(200).json(foundAsset);
   } else {
-    res.status(401).json("Not Logged in");
+    res.status(404).json({});
   }
 };
 
@@ -54,26 +44,50 @@ export const updateUserAsset: RequestHandler = async (req, res, next) => {
   let user: UserData | null = await verifyUser(req);
 
   if (user) {
-    let asset_id = req.params.postId;
+    let asset_id = req.params.asset_id;
     let updatedAsset: UserAssets = req.body;
 
     updatedAsset.user_id = user.user_id;
 
     let assetFound = await UserAssets.findByPk(asset_id);
 
-    assetFound &&
-      assetFound.asset_id == updatedAsset.asset_id &&
-      updatedAsset.message &&
-      updatedAsset.imageLink &&
-      updatedAsset.videoLink &&
-      updatedAsset.user_id;
-    {
-      await UserAssets.update(updatedAsset, {
-        where: { asset_id: parseInt(asset_id) }
-      }).then;
+    if (assetFound) {
+      if (assetFound.user_id == user.user_id) {
+        await UserAssets.update(updatedAsset, {
+          where: { asset_id: asset_id }
+        });
+        res.status(200).json(updatedAsset);
+      } else {
+        res.status(403).json("Not Authorized");
+      }
+    } else {
+      res.status(404).json("Not found");
     }
-    res.status(200).json(updatedAsset);
   } else {
-    res.status(400).json();
+    res.status(401).json("Not Logged in");
+  }
+};
+
+export const deleteUserAsset: RequestHandler = async (req, res, next) => {
+  let user: UserData | null = await verifyUser(req);
+
+  if (user) {
+    let asset_id = req.params.asset_id;
+
+    let assetFound = await UserAssets.findByPk(asset_id);
+
+    if (assetFound) {
+      if (assetFound.user_id == user.user_id) {
+        await assetFound.destroy();
+
+        res.status(200).json("Post Deleted");
+      } else {
+        res.status(403).json("Not Authorized");
+      }
+    } else {
+      res.status(404).json("Not found");
+    }
+  } else {
+    res.status(401).json("Not Logged in");
   }
 };
