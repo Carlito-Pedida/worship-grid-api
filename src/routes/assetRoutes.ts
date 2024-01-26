@@ -3,6 +3,7 @@ import {
   createUserAsset,
   deleteUserAsset,
   getAllUserAssets,
+  getOneUserAsset,
   updateUserAsset
 } from "../controllers/assetDataControl";
 
@@ -12,7 +13,9 @@ router.get("/", getAllUserAssets);
 
 router.post("/create_new_asset", createUserAsset);
 
-router.put("/:asset_id/edit", updateUserAsset);
+router.get("/asset/:asset_id", getOneUserAsset);
+
+router.put("/asset/:asset_id", updateUserAsset);
 
 router.delete("/:asset_id", deleteUserAsset);
 
