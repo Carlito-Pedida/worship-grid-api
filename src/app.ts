@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/server/users", userRoutes);
 app.use("/server/assets", assetRoutes);
 app.use("/server/responses", responseRoutes);
-app.use("/api/rss", rssRoutes);
+app.use("/server/rss", rssRoutes);
 app.post("/server/checkout", async (req, res) => {
   console.log("Received checkout request");
   console.log(req.body);
