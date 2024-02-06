@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import RSSParser from "rss-parser";
 var cron = require("node-cron");
 const feedURLs = [
-  "https://www.techrepublic.com/rssfeeds/articles/",
+  "https://aworshipersjournal.com/feed/",
   "https://www.techrepublic.com/rssfeeds/topic/artificial-intelligence/",
   "https://www.techrepublic.com/rssfeeds/topic/smart-persons-guides/",
   "https://www.techrepublic.com/rssfeeds/topic/cloud-security/",
