@@ -1,19 +1,7 @@
 import { Request, Response } from "express";
 import RSSParser from "rss-parser";
 var cron = require("node-cron");
-const feedURLs = [
-  "https://www.techrepublic.com/rssfeeds/articles/",
-  "https://www.techrepublic.com/rssfeeds/topic/artificial-intelligence/",
-  "https://www.techrepublic.com/rssfeeds/topic/smart-persons-guides/",
-  "https://www.techrepublic.com/rssfeeds/topic/cloud-security/",
-  "https://www.techrepublic.com/rssfeeds/topic/cybersecurity/",
-  "https://www.techrepublic.com/rssfeeds/topic/developer/",
-  "https://www.techrepublic.com/rssfeeds/topic/devops/",
-  "https://www.techrepublic.com/rssfeeds/topic/education/",
-  "https://www.techrepublic.com/rssfeeds/topic/google/",
-  "https://www.techrepublic.com/rssfeeds/topic/tech-and-work/",
-  "https://www.techrepublic.com/rssfeeds/topic/tech-industry/"
-];
+const feedURLs = ["https://aworshipersjournal.com/feed/"];
 
 const parser = new RSSParser();
 export const articles: any[] = [];
