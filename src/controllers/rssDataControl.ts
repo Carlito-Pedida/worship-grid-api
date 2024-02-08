@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import RSSParser from "rss-parser";
 var cron = require("node-cron");
-const feedURLs = ["https://aworshipersjournal.com/feed/"];
+const feedURLs = ["https://media.rss.com/dailydevotionals/feed.xml"];
 
 const parser = new RSSParser();
 export const articles: any[] = [];

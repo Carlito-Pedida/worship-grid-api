@@ -53,37 +53,54 @@ export const signinUser: RequestHandler = async (req, res, next) => {
 };
 
 export const getOneUser: RequestHandler = async (req, res, next) => {
-  let user: UserData | null = await verifyUser(req);
-
-  if (user) {
-    let {
-      user_id,
-      username,
-      first_name,
-      last_name,
-      email,
-      city,
-      state,
-      zipcode,
-      position,
-      avatar
-    } = user;
-    res.status(200).json({
-      user_id,
-      username,
-      first_name,
-      last_name,
-      email,
-      city,
-      state,
-      zipcode,
-      position,
-      avatar
-    });
+  let user_id = req.params.user_id;
+  let foundUser = await UserData.findByPk(user_id, {
+    attributes: { exclude: ["password"] },
+    include: [{ all: true, nested: true }]
+  });
+  if (foundUser) {
+    res.status(200).json(foundUser);
   } else {
-    res.status(401).send();
+    res.status(404).json({});
   }
 };
+
+// export const getOneUser: RequestHandler = async (req, res, next) => {
+//   let user: UserData | null = await verifyUser(req);
+
+//   if (user) {
+//     let {
+//       user_id,
+//       username,
+//       first_name,
+//       last_name,
+//       email,
+//       city,
+//       state,
+//       zipcode,
+//       position,
+//       avatar,
+//       createdAt,
+//       updatedAt
+//     } = user;
+//     res.status(200).json({
+//       user_id,
+//       username,
+//       first_name,
+//       last_name,
+//       email,
+//       city,
+//       state,
+//       zipcode,
+//       position,
+//       avatar,
+//       createdAt,
+//       updatedAt
+//     });
+//   } else {
+//     res.status(401).send();
+//   }
+// };
 
 export const getUserAssets: RequestHandler = async (req, res, next) => {
   let user: UserData | null = await verifyUser(req);
