@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 });
 
 // Syncing our database
-db.sync({ alter: false }).then(() => {
+db.sync({ alter: true }).then(() => {
   console.info("connected to the database!");
 });
 
