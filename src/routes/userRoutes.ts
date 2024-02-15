@@ -21,7 +21,7 @@ router.get("/:user_id", getOneUser);
 
 router.get("/asset/:user_id", getUserAssets);
 
-router.put("/:user_id/edit", updateUserData);
+router.put("/:user_id", updateUserData);
 
 router.delete("/:user_id", deleteUserData);
 

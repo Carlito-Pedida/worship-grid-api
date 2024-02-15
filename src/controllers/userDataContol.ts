@@ -55,7 +55,6 @@ export const signinUser: RequestHandler = async (req, res, next) => {
 export const getOneUser: RequestHandler = async (req, res, next) => {
   let user_id = req.params.user_id;
   let foundUser = await UserData.findByPk(user_id, {
-    attributes: { exclude: ["password"] },
     include: [{ all: true, nested: true }]
   });
   if (foundUser) {
@@ -115,6 +114,34 @@ export const getUserAssets: RequestHandler = async (req, res, next) => {
   }
 };
 
+// export const updateUserData: RequestHandler = async (req, res, next) => {
+//   let user: UserData | null = await verifyUser(req);
+
+//   if (user) {
+//     let user_id = req.params.user_id;
+//     let updatedUser: UserData = req.body;
+
+//     updatedUser.user_id = user.user_id;
+
+//     let userFound = await UserData.findByPk(user_id);
+
+//     if (userFound) {
+//       if (userFound.user_id == user.user_id) {
+//         await UserData.update(updatedUser, {
+//           where: { user_id: user_id }
+//         });
+//         res.status(200).json(updatedUser);
+//       } else {
+//         res.status(403).json("Not Authorized");
+//       }
+//     } else {
+//       res.status(404).json("Not found");
+//     }
+//   } else {
+//     res.status(401).json("Not Logged in");
+//   }
+// };
+
 export const updateUserData: RequestHandler = async (req, res, next) => {
   const user: UserData | null = await verifyUser(req);
 
@@ -131,12 +158,15 @@ export const updateUserData: RequestHandler = async (req, res, next) => {
 
       userFound &&
         userFound.user_id == updatedUser.user_id &&
+        updatedUser.username &&
+        updatedUser.password &&
         updatedUser.email &&
         updatedUser.first_name &&
         updatedUser.last_name &&
         updatedUser.city &&
         updatedUser.state &&
         updatedUser.zipcode &&
+        updatedUser.position &&
         updatedUser.avatar;
       {
         await UserData.update(updatedUser, {
