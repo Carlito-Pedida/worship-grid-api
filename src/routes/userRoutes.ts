@@ -19,7 +19,7 @@ router.post("/signin", signinUser);
 
 router.get("/:user_id", getOneUser);
 
-router.get("/asset/:user_id", getUserAssets);
+router.get("/assets/:user_id", getUserAssets);
 
 router.put("/:user_id", updateUserData);
 
