@@ -43,7 +43,7 @@ export function UserResponseFactory(sequelize: Sequelize) {
         allowNull: false
       },
       reactions: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false
       },
       createdAt: {
