@@ -40,11 +40,11 @@ export function UserAssetsFactory(sequelize: Sequelize) {
         allowNull: true
       },
       imageLink: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
       },
       videoLink: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
       },
       createdAt: {
