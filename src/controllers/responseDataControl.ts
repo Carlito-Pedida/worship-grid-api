@@ -35,12 +35,68 @@ export const createUserReply: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const getOneUserReply: RequestHandler = async (req, res, next) => {
+export const getOneUserResponse: RequestHandler = async (req, res, next) => {
   let response_id = req.params.response_id;
   let userReplyFound = await UserResponse.findByPk(response_id);
   if (userReplyFound) {
     res.status(200).json(userReplyFound);
   } else {
     res.status(404).json({});
+  }
+};
+
+export const updateUserResponse: RequestHandler = async (req, res, next) => {
+  let user: UserData | null = await verifyUser(req);
+
+  if (user) {
+    let response_id = req.params.response_id;
+    let updatedResponse: UserResponse = req.body;
+
+    if (!updatedResponse) {
+      res.status(400).json("QAK Reply should not be empty");
+    }
+
+    updatedResponse.user_id = user.user_id;
+
+    let responseFound = await UserResponse.findByPk(response_id);
+
+    if (responseFound) {
+      if (responseFound.user_id == user.user_id) {
+        await UserResponse.update(updatedResponse, {
+          where: { response_id: response_id }
+        });
+        res.status(200).json(updatedResponse);
+      } else {
+        res.status(403).json("Not Authorized");
+      }
+    } else {
+      res.status(404).json("Not found");
+    }
+  } else {
+    res.status(401).json("Not Logged in");
+  }
+};
+
+export const deleteUserResponse: RequestHandler = async (req, res, next) => {
+  let user: UserData | null = await verifyUser(req);
+
+  if (user) {
+    let response_id = req.params.response_id;
+
+    let replyFound = await UserResponse.findByPk(response_id);
+
+    if (replyFound) {
+      if (replyFound.user_id == user.user_id) {
+        await replyFound.destroy();
+
+        res.status(200).json("Post Deleted");
+      } else {
+        res.status(403).json("Not Authorized");
+      }
+    } else {
+      res.status(404).json("Not found");
+    }
+  } else {
+    res.status(401).json("Not Logged in");
   }
 };
