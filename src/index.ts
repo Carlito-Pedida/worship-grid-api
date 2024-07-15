@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import morgan from "morgan";
 import { db } from "./models";
 import userRoutes from "./routes/userRoutes";
@@ -9,9 +9,18 @@ import rssRoutes from "./routes/rssRoutes";
 const cors = require("cors");
 
 const app = express();
+const port = process.env.PORT || 5000;
 const corsOptions = {
   origin: ["http://localhost:4200", "http://localhost:5001"]
 };
+
+app.get("/", (_req: Request, res: Response) => {
+  return res.send("Express Typescript on Vercel");
+});
+
+app.get("/ping", (_req: Request, res: Response) => {
+  return res.send("pong 🏓");
+});
 
 const stripe = require("stripe")(process.env.STRIPE_SK_CODE);
 
@@ -63,4 +72,8 @@ db.sync({ alter: true }).then(() => {
   console.info("connected to the database!");
 });
 
-app.listen(5000);
+// app.listen(5000);
+
+app.listen(port, () => {
+  return console.log(`Server is listening on ${port}`);
+});
