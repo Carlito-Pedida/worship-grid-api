@@ -9,7 +9,7 @@ import rssRoutes from "./routes/rssRoutes";
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 const corsOptions = {
   origin: ["http://localhost:4200", "http://localhost:5001"]
 };
