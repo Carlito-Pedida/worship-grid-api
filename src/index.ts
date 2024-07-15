@@ -9,13 +9,9 @@ import rssRoutes from "./routes/rssRoutes";
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || "5000";
 const corsOptions = {
-  origin: [
-    "http://localhost:4200",
-    "http://localhost:5001",
-    "https://worship-grid-ui.vercel.app"
-  ]
+  origin: ["https://worship-grid-ui.vercel.app"]
 };
 
 app.get("/", (_req: Request, res: Response) => {
@@ -72,7 +68,7 @@ app.use((req, res, next) => {
 });
 
 // Syncing our database
-db.sync({ alter: true }).then(() => {
+db.sync({ alter: false }).then(() => {
   console.info("connected to the database!");
 });
 

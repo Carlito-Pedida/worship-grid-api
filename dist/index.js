@@ -12,13 +12,9 @@ const responseRoutes_1 = __importDefault(require("./routes/responseRoutes"));
 const rssRoutes_1 = __importDefault(require("./routes/rssRoutes"));
 const cors = require("cors");
 const app = (0, express_1.default)();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || "5000";
 const corsOptions = {
-    origin: [
-        "http://localhost:4200",
-        "http://localhost:5001",
-        "https://worship-grid-ui.vercel.app"
-    ]
+    origin: ["https://worship-grid-ui.vercel.app"]
 };
 app.get("/", (_req, res) => {
     return res.send("Express Typescript on Vercel");
@@ -63,7 +59,7 @@ app.use((req, res, next) => {
     res.status(404).end();
 });
 // Syncing our database
-models_1.db.sync({ alter: true }).then(() => {
+models_1.db.sync({ alter: false }).then(() => {
     console.info("connected to the database!");
 });
 // app.listen(5000);
