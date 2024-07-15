@@ -14,7 +14,11 @@ const cors = require("cors");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
 const corsOptions = {
-    origin: ["http://localhost:4200", "http://localhost:5001"]
+    origin: [
+        "http://localhost:4200",
+        "http://localhost:5001",
+        "https://worship-grid-ui.vercel.app"
+    ]
 };
 app.get("/", (_req, res) => {
     return res.send("Express Typescript on Vercel");
@@ -48,8 +52,8 @@ app.post("/server/checkout", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: "payment",
-        success_url: "http://localhost:5001/paysuccessful",
-        cancel_url: "http://localhost:5001/paycanceled"
+        success_url: "https://worship-grid-ui.vercel.app/paysuccessful",
+        cancel_url: "https://worship-grid-ui.vercel.app/paycanceled"
     });
     res.send(JSON.stringify({
         url: session.url
