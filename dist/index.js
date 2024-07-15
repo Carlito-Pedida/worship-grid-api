@@ -56,4 +56,4 @@ models_1.db.sync({ alter: true }).then(() => {
     console.info("connected to the database!");
 });
 app.listen(5000);
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=index.js.map
