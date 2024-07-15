@@ -12,9 +12,16 @@ const responseRoutes_1 = __importDefault(require("./routes/responseRoutes"));
 const rssRoutes_1 = __importDefault(require("./routes/rssRoutes"));
 const cors = require("cors");
 const app = (0, express_1.default)();
+const port = process.env.PORT || 5000;
 const corsOptions = {
     origin: ["http://localhost:4200", "http://localhost:5001"]
 };
+app.get("/", (_req, res) => {
+    return res.send("Express Typescript on Vercel");
+});
+app.get("/ping", (_req, res) => {
+    return res.send("pong 🏓");
+});
 const stripe = require("stripe")(process.env.STRIPE_SK_CODE);
 app.use(cors(corsOptions));
 app.use(express_1.default.static("public"));
@@ -55,4 +62,8 @@ app.use((req, res, next) => {
 models_1.db.sync({ alter: true }).then(() => {
     console.info("connected to the database!");
 });
-app.listen(5000);
+// app.listen(5000);
+app.listen(port, () => {
+    return console.log(`Server is listening on ${port}`);
+});
+//# sourceMappingURL=index.js.map
