@@ -11,7 +11,7 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || "5000";
 const corsOptions = {
-  origin: ["https://worship-grid-ui-production.vercel.app/"]
+  origin: ["https://worship-grid-ui-production.vercel.app"]
 };
 
 app.get("/", (_req: Request, res: Response) => {
@@ -52,8 +52,8 @@ app.post("/server/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
-    success_url: "https://worship-grid-ui-production.vercel.app//paysuccessful",
-    cancel_url: "https://worship-grid-ui-production.vercel.app//paycanceled"
+    success_url: "https://worship-grid-ui-production.vercel.app/paysuccessful",
+    cancel_url: "https://worship-grid-ui-production.vercel.app/paycanceled"
   });
 
   res.send(
